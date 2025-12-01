@@ -3,6 +3,10 @@ import { Section } from "@/components/section";
 import { CTABlock } from "@/components/cta-block";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { FadeIn } from "@/components/animations/fade-in";
+import { ScaleOnScroll } from "@/components/animations/scale-on-scroll";
+import { ParallaxScroll } from "@/components/animations/parallax-scroll";
+import { ProfessionalImage } from "@/components/professional-image";
 import { Settings, Zap, Bot, Headphones, CheckCircle } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -33,28 +37,34 @@ export default function ServicesPage() {
       {/* Operations & Systems Consulting */}
       <Section id="operations" title="Operations & Systems Consulting">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          <div>
-            <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-xl bg-emerald-100">
-              <Settings className="h-8 w-8 text-emerald-600" />
+          <FadeIn direction="right">
+            <div>
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 shadow-lg">
+                <Settings className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="mb-4 text-2xl font-bold">
+                Design Your Business Operating System
+              </h3>
+              <p className="mb-6 text-slate-600">
+                Most businesses operate on a mix of habits, scattered tools, and
+                institutional memory. We help you build a real operating system:
+                clear processes, documented workflows, and structured
+                communication.
+              </p>
+              <p className="text-slate-600">
+                We map your current state, identify bottlenecks, and design
+                systems that make work predictable and scalable. From lead intake
+                to project delivery, we help you define how things should work—and
+                document it so your team can execute consistently.
+              </p>
             </div>
-            <h3 className="mb-4 text-2xl font-bold">
-              Design Your Business Operating System
-            </h3>
-            <p className="mb-6 text-slate-600">
-              Most businesses operate on a mix of habits, scattered tools, and
-              institutional memory. We help you build a real operating system:
-              clear processes, documented workflows, and structured
-              communication.
-            </p>
-            <p className="text-slate-600">
-              We map your current state, identify bottlenecks, and design
-              systems that make work predictable and scalable. From lead intake
-              to project delivery, we help you define how things should work—and
-              document it so your team can execute consistently.
-            </p>
-          </div>
-          <div>
-            <Card>
+          </FadeIn>
+          <ParallaxScroll offset={20}>
+            <ScaleOnScroll delay={0.2}>
+              <ProfessionalImage type="systems" className="mb-8 h-[300px]" />
+            </ScaleOnScroll>
+            <FadeIn delay={0.3}>
+              <Card>
               <CardHeader>
                 <CardTitle>What You Get</CardTitle>
               </CardHeader>
@@ -76,7 +86,8 @@ export default function ServicesPage() {
                 </ul>
               </CardContent>
             </Card>
-          </div>
+            </FadeIn>
+          </ParallaxScroll>
         </div>
       </Section>
 
@@ -88,7 +99,12 @@ export default function ServicesPage() {
       >
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="order-2 lg:order-1">
-            <Card>
+            <ParallaxScroll offset={20}>
+              <ScaleOnScroll delay={0.2}>
+                <ProfessionalImage type="automation" className="mb-8 h-[300px]" />
+              </ScaleOnScroll>
+              <FadeIn delay={0.3}>
+                <Card>
               <CardHeader>
                 <CardTitle>What We Automate</CardTitle>
               </CardHeader>
@@ -110,11 +126,14 @@ export default function ServicesPage() {
                 </ul>
               </CardContent>
             </Card>
+              </FadeIn>
+            </ParallaxScroll>
           </div>
-          <div className="order-1 lg:order-2">
-            <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-xl bg-emerald-100">
-              <Zap className="h-8 w-8 text-emerald-600" />
-            </div>
+          <FadeIn direction="left" delay={0.1} className="order-1 lg:order-2">
+            <div>
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 shadow-lg">
+                <Zap className="h-8 w-8 text-white" />
+              </div>
             <h3 className="mb-4 text-2xl font-bold">
               Connect Your Tools and Eliminate Manual Work
             </h3>
@@ -130,16 +149,18 @@ export default function ServicesPage() {
               workflows that run in the background and keep your business moving
               forward.
             </p>
-          </div>
+            </div>
+          </FadeIn>
         </div>
       </Section>
 
       {/* AI Assistants & Chatbots */}
       <Section id="ai" title="AI Assistants & Chatbots">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          <div>
-            <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-xl bg-emerald-100">
-              <Bot className="h-8 w-8 text-emerald-600" />
+          <FadeIn direction="right">
+            <div>
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 shadow-lg">
+                <Bot className="h-8 w-8 text-white" />
             </div>
             <h3 className="mb-4 text-2xl font-bold">
               Custom AI Solutions for Customer and Internal Use
@@ -155,9 +176,14 @@ export default function ServicesPage() {
               that answer employee questions, we design AI tools that enhance
               your customer and team experience.
             </p>
-          </div>
-          <div>
-            <Card>
+            </div>
+          </FadeIn>
+          <ParallaxScroll offset={20}>
+            <ScaleOnScroll delay={0.2}>
+              <ProfessionalImage type="ai" className="mb-8 h-[300px]" />
+            </ScaleOnScroll>
+            <FadeIn delay={0.3}>
+              <Card>
               <CardHeader>
                 <CardTitle>AI Solutions We Build</CardTitle>
               </CardHeader>
@@ -179,7 +205,8 @@ export default function ServicesPage() {
                 </ul>
               </CardContent>
             </Card>
-          </div>
+            </FadeIn>
+          </ParallaxScroll>
         </div>
       </Section>
 
@@ -187,7 +214,12 @@ export default function ServicesPage() {
       <Section background="gray" title="Implementation & Support">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="order-2 lg:order-1">
-            <Card>
+            <ParallaxScroll offset={20}>
+              <ScaleOnScroll delay={0.2}>
+                <ProfessionalImage type="team" className="mb-8 h-[300px]" />
+              </ScaleOnScroll>
+              <FadeIn delay={0.3}>
+                <Card>
               <CardHeader>
                 <CardTitle>Ongoing Support Includes</CardTitle>
               </CardHeader>
@@ -209,11 +241,14 @@ export default function ServicesPage() {
                 </ul>
               </CardContent>
             </Card>
+              </FadeIn>
+            </ParallaxScroll>
           </div>
-          <div className="order-1 lg:order-2">
-            <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-xl bg-emerald-100">
-              <Headphones className="h-8 w-8 text-emerald-600" />
-            </div>
+          <FadeIn direction="left" delay={0.1} className="order-1 lg:order-2">
+            <div>
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 shadow-lg">
+                <Headphones className="h-8 w-8 text-white" />
+              </div>
             <h3 className="mb-4 text-2xl font-bold">
               Done-For-You Implementation and Ongoing Support
             </h3>
@@ -227,19 +262,22 @@ export default function ServicesPage() {
               partner in making systems, automation, and AI a seamless part of
               how you operate.
             </p>
-          </div>
+            </div>
+          </FadeIn>
         </div>
       </Section>
 
       {/* CTA */}
       <Section>
-        <CTABlock
+        <FadeIn>
+          <CTABlock
           title="Request a Systems & Automation Plan"
           description="Let's assess your current operations and map out a plan to automate, integrate, and optimize."
           buttonText="Get Started"
           buttonHref="/contact"
           variant="accent"
         />
+        </FadeIn>
       </Section>
     </>
   );

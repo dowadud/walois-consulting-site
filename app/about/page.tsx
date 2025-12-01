@@ -3,6 +3,11 @@ import { Section } from "@/components/section";
 import { CTABlock } from "@/components/cta-block";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { FadeIn } from "@/components/animations/fade-in";
+import { StaggerContainer, StaggerItem } from "@/components/animations/stagger-container";
+import { ScaleOnScroll } from "@/components/animations/scale-on-scroll";
+import { ParallaxScroll } from "@/components/animations/parallax-scroll";
+import { ProfessionalImage } from "@/components/professional-image";
 import { Target, Users, Lightbulb, TrendingUp } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -33,9 +38,10 @@ export default function AboutPage() {
 
       {/* Our Story */}
       <Section title="Our Story">
-        <div className="mx-auto max-w-3xl">
-          <div className="space-y-6 text-lg leading-relaxed text-slate-600">
-            <p>
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+          <FadeIn direction="right">
+            <div className="space-y-6 text-lg leading-relaxed text-slate-600">
+              <p>
               Walo Innovated Solutions was born from a simple frustration: too
               many good businesses were held back by scattered tools, unclear
               processes, and manual work that didn't need to be manual.
@@ -61,20 +67,29 @@ export default function AboutPage() {
               operate smarter, move faster, and deliver better experiences to
               their customers.
             </p>
-          </div>
+            </div>
+          </FadeIn>
+          <ParallaxScroll offset={30}>
+            <ScaleOnScroll delay={0.2}>
+              <ProfessionalImage type="growth" className="h-full min-h-[500px]" />
+            </ScaleOnScroll>
+          </ParallaxScroll>
         </div>
       </Section>
 
       {/* Our Mission */}
       <Section background="gray" title="Our Mission">
         <div className="mx-auto max-w-4xl">
-          <p className="mb-12 text-center text-xl text-slate-600">
-            To bring enterprise-level operational intelligence to small and
-            mid-sized businesses through practical systems, automation, and AI.
-          </p>
+          <FadeIn>
+            <p className="mb-12 text-center text-xl text-slate-600">
+              To bring enterprise-level operational intelligence to small and
+              mid-sized businesses through practical systems, automation, and AI.
+            </p>
+          </FadeIn>
 
-          <div className="grid gap-8 md:grid-cols-2">
-            <Card>
+          <StaggerContainer className="grid gap-8 md:grid-cols-2">
+            <StaggerItem>
+              <Card className="h-full transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
               <CardContent className="pt-6">
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-emerald-100">
                   <Target className="h-6 w-6 text-emerald-600" />
@@ -134,54 +149,63 @@ export default function AboutPage() {
                 </p>
               </CardContent>
             </Card>
-          </div>
+            </StaggerItem>
+          </StaggerContainer>
         </div>
       </Section>
 
       {/* Our Values */}
       <Section title="Our Values">
         <div className="mx-auto max-w-3xl space-y-8">
-          <div>
-            <h3 className="mb-3 text-2xl font-semibold text-slate-900">
-              Clear Communication
-            </h3>
-            <p className="text-slate-600">
-              No buzzwords, no jargon. We explain things in plain language and
-              make sure everyone understands what's happening and why.
-            </p>
-          </div>
+          <FadeIn direction="up" delay={0.1}>
+            <div>
+              <h3 className="mb-3 text-2xl font-semibold text-slate-900">
+                Clear Communication
+              </h3>
+              <p className="text-slate-600">
+                No buzzwords, no jargon. We explain things in plain language and
+                make sure everyone understands what's happening and why.
+              </p>
+            </div>
+          </FadeIn>
 
-          <div>
-            <h3 className="mb-3 text-2xl font-semibold text-slate-900">
-              Practical, No-Jargon Solutions
-            </h3>
-            <p className="text-slate-600">
-              We're not interested in being clever—we're interested in what
-              works. Our solutions are practical, proven, and focused on real
-              business outcomes.
-            </p>
-          </div>
+          <FadeIn direction="up" delay={0.2}>
+            <div>
+              <h3 className="mb-3 text-2xl font-semibold text-slate-900">
+                Practical, No-Jargon Solutions
+              </h3>
+              <p className="text-slate-600">
+                We're not interested in being clever—we're interested in what
+                works. Our solutions are practical, proven, and focused on real
+                business outcomes.
+              </p>
+            </div>
+          </FadeIn>
 
-          <div>
-            <h3 className="mb-3 text-2xl font-semibold text-slate-900">
-              Ownership of Results
-            </h3>
-            <p className="text-slate-600">
-              We don't walk away after delivery. We stick around to make sure
-              things work, iterate based on feedback, and ensure you see real
-              improvement.
-            </p>
-          </div>
+          <FadeIn direction="up" delay={0.3}>
+            <div>
+              <h3 className="mb-3 text-2xl font-semibold text-slate-900">
+                Ownership of Results
+              </h3>
+              <p className="text-slate-600">
+                We don't walk away after delivery. We stick around to make sure
+                things work, iterate based on feedback, and ensure you see real
+                improvement.
+              </p>
+            </div>
+          </FadeIn>
 
-          <div>
-            <h3 className="mb-3 text-2xl font-semibold text-slate-900">
-              Respect for People and Data
-            </h3>
-            <p className="text-slate-600">
-              Your data, your people, and your trust matter. We build systems
-              with security, privacy, and human dignity at the core.
-            </p>
-          </div>
+          <FadeIn direction="up" delay={0.4}>
+            <div>
+              <h3 className="mb-3 text-2xl font-semibold text-slate-900">
+                Respect for People and Data
+              </h3>
+              <p className="text-slate-600">
+                Your data, your people, and your trust matter. We build systems
+                with security, privacy, and human dignity at the core.
+              </p>
+            </div>
+          </FadeIn>
         </div>
       </Section>
 
@@ -193,10 +217,11 @@ export default function AboutPage() {
       >
         <div className="mx-auto max-w-4xl">
           <div className="space-y-8">
-            <div className="flex gap-6">
-              <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-emerald-600 text-xl font-bold text-white">
-                1
-              </div>
+            <FadeIn direction="right" delay={0.1}>
+              <div className="flex gap-6">
+                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 text-xl font-bold text-white shadow-lg">
+                  1
+                </div>
               <div>
                 <h3 className="mb-2 text-xl font-semibold">Strategy</h3>
                 <p className="text-slate-600">
@@ -204,12 +229,14 @@ export default function AboutPage() {
                   current challenges. We map out what's working and what's not.
                 </p>
               </div>
-            </div>
-
-            <div className="flex gap-6">
-              <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-emerald-600 text-xl font-bold text-white">
-                2
               </div>
+            </FadeIn>
+
+            <FadeIn direction="right" delay={0.2}>
+              <div className="flex gap-6">
+                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 text-xl font-bold text-white shadow-lg">
+                  2
+                </div>
               <div>
                 <h3 className="mb-2 text-xl font-semibold">Design</h3>
                 <p className="text-slate-600">
@@ -218,12 +245,14 @@ export default function AboutPage() {
                   customers in mind.
                 </p>
               </div>
-            </div>
-
-            <div className="flex gap-6">
-              <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-emerald-600 text-xl font-bold text-white">
-                3
               </div>
+            </FadeIn>
+
+            <FadeIn direction="right" delay={0.3}>
+              <div className="flex gap-6">
+                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 text-xl font-bold text-white shadow-lg">
+                  3
+                </div>
               <div>
                 <h3 className="mb-2 text-xl font-semibold">Build</h3>
                 <p className="text-slate-600">
@@ -232,12 +261,14 @@ export default function AboutPage() {
                   with your existing tools.
                 </p>
               </div>
-            </div>
-
-            <div className="flex gap-6">
-              <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-emerald-600 text-xl font-bold text-white">
-                4
               </div>
+            </FadeIn>
+
+            <FadeIn direction="right" delay={0.4}>
+              <div className="flex gap-6">
+                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 text-xl font-bold text-white shadow-lg">
+                  4
+                </div>
               <div>
                 <h3 className="mb-2 text-xl font-semibold">Support</h3>
                 <p className="text-slate-600">
@@ -246,19 +277,22 @@ export default function AboutPage() {
                   delivers measurable results.
                 </p>
               </div>
-            </div>
+              </div>
+            </FadeIn>
           </div>
         </div>
       </Section>
 
       {/* CTA */}
       <Section>
-        <CTABlock
+        <FadeIn>
+          <CTABlock
           title="Ready to Transform Your Operations?"
           description="Let's talk about your business, your challenges, and how we can help you build systems that actually work."
           buttonText="Book a Discovery Call"
           buttonHref="/contact"
         />
+        </FadeIn>
       </Section>
     </>
   );

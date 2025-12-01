@@ -5,7 +5,11 @@ import { CTABlock } from "@/components/cta-block";
 import { Card, CardContent } from "@/components/ui/card";
 import { FadeIn } from "@/components/animations/fade-in";
 import { StaggerContainer, StaggerItem } from "@/components/animations/stagger-container";
+import { ScaleOnScroll } from "@/components/animations/scale-on-scroll";
+import { ParallaxScroll } from "@/components/animations/parallax-scroll";
 import { TechImagePlaceholder } from "@/components/tech-image-placeholder";
+import { ProfessionalImage } from "@/components/professional-image";
+import { ClientResultsShowcase } from "@/components/client-results-showcase";
 import {
   Settings,
   Zap,
@@ -268,24 +272,40 @@ export default function HomePage() {
         </StaggerContainer>
       </Section>
 
-      {/* About Walo (short) */}
-      <Section title="About Walo" subtitle="Where real operations meet modern tools">
-        <FadeIn>
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="text-lg leading-relaxed text-slate-600">
-              We've seen firsthand how scattered tools, unclear processes, and
-              manual work hold businesses back. Walo was built to solve that—by
-              combining real-world operations experience with modern automation
-              and AI. We don't just advise; we design, build, and support until
-              your systems actually work.
-            </p>
-            <p className="mt-6 text-lg leading-relaxed text-slate-600">
-              Based in Charlotte, NC, we work with businesses across the region
-              and beyond to bring clarity, efficiency, and intelligence to their
-              operations.
-            </p>
-    </div>
-        </FadeIn>
+      {/* Client Results Showcase - inspired by Bain */}
+      <Section background="white">
+        <ClientResultsShowcase />
+      </Section>
+
+      {/* About Walo with parallax images */}
+      <Section title="About Walo" subtitle="Where real operations meet modern tools" background="gray">
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+          <FadeIn direction="left">
+            <div className="space-y-6">
+              <p className="text-lg leading-relaxed text-slate-600">
+                We've seen firsthand how scattered tools, unclear processes, and
+                manual work hold businesses back. Walo was built to solve that—by
+                combining real-world operations experience with modern automation
+                and AI.
+              </p>
+              <p className="text-lg leading-relaxed text-slate-600">
+                We don't just advise; we design, build, and support until
+                your systems actually work. Our approach is hands-on, practical,
+                and focused on delivering measurable results.
+              </p>
+              <p className="text-lg leading-relaxed text-slate-600">
+                Based in Charlotte, NC, we work with businesses across the region
+                and beyond to bring clarity, efficiency, and intelligence to their
+                operations.
+              </p>
+            </div>
+          </FadeIn>
+          <ParallaxScroll offset={30}>
+            <ScaleOnScroll>
+              <ProfessionalImage type="strategy" className="h-full min-h-[400px]" />
+            </ScaleOnScroll>
+          </ParallaxScroll>
+        </div>
       </Section>
 
       {/* Primary CTA */}
