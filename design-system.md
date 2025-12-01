@@ -1,10 +1,11 @@
-# Walo Innovated Solutions Design System
+# Walo Innovated Solutions Design System (Updated - Tech Forward)
 
 ## Brand Identity
 
 **Brand Name**: Walo Innovated Solutions (WaloIS)  
 **Location**: Charlotte, North Carolina  
-**Positioning**: Tech-forward consulting firm specializing in systems design, automation, and AI
+**Positioning**: Tech-forward consulting firm specializing in systems design, automation, and AI  
+**Visual Style**: Modern, technology-focused, with dynamic animations and depth
 
 ## Color Palette
 
@@ -144,14 +145,23 @@ Using Tailwind's default spacing scale (1 unit = 0.25rem = 4px):
 ## Animation & Transitions
 
 ### Hover States
-- **Duration**: 200ms
-- **Easing**: ease-in-out
-- **Properties**: background-color, color, transform, shadow
+- **Duration**: 200-300ms
+- **Easing**: ease-out, [0.21, 0.47, 0.32, 0.98]
+- **Properties**: background-color, color, transform, shadow, scale
+- **Transform**: translateY(-8px) for cards, scale(1.02-1.1) for buttons
 
-### Subtle Animations
-- **Fade In**: opacity transition on scroll
-- **Scale**: 1.02-1.05 on hover for cards
-- **Slide**: Smooth mobile menu slide-in
+### Scroll Animations (Framer Motion)
+- **Fade In**: opacity 0 → 1 with directional slide
+- **Stagger**: Children animate sequentially with 0.1s delay
+- **Viewport**: Once mode with -100px margin for early trigger
+- **Scale**: Subtle scale on cards (1.02-1.05)
+- **Rotate**: Icon rotation on hover (5deg)
+
+### Modern Effects
+- **Glass Morphism**: backdrop-blur-xl with semi-transparent backgrounds
+- **Gradient Overlays**: Animated gradient blurs for depth
+- **Grid Backgrounds**: Animated tech grids with emerald accents
+- **Glow Effects**: Radial gradients with blur for ambient lighting
 
 ## Responsive Breakpoints
 
@@ -171,11 +181,16 @@ Using Tailwind's default spacing scale (1 unit = 0.25rem = 4px):
 
 ## Usage Examples
 
-### Hero Section
-- Large headline (4xl or 5xl)
-- Subheadline (lg or xl)
-- Primary CTA button with secondary option
-- Background: Gradient from Emerald 50 to White
+### Hero Section (Tech Style)
+- **Background**: Dark (slate-950) with animated grid pattern
+- **Headline**: 5xl-7xl with gradient text (white → emerald-200)
+- **Animations**: Sequential fade-in with stagger effect
+- **Elements**: 
+  - Floating badge with backdrop blur
+  - Feature pills with icons
+  - Stats bar with glassmorphism
+  - Radial gradient glows (emerald/amber)
+- **Gradient Fade**: Bottom fade to white for smooth transition
 
 ### Service Cards
 - Icon or badge at top
