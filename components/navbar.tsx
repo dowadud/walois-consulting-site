@@ -23,12 +23,12 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+    <nav className="sticky top-0 z-50 w-full border-b border-slate-200/50 bg-white/80 backdrop-blur-xl supports-[backdrop-filter]:bg-white/60">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <span className="text-xl font-bold text-primary">
+          <Link href="/" className="group flex items-center space-x-2">
+            <span className="bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-xl font-bold text-transparent transition-all group-hover:from-emerald-500 group-hover:to-amber-500">
               Walo Innovated Solutions
             </span>
           </Link>
@@ -39,12 +39,12 @@ export function Navbar() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-sm font-medium text-slate-700 transition-colors hover:text-primary"
+                className="relative text-sm font-medium text-slate-700 transition-colors after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-gradient-to-r after:from-emerald-500 after:to-amber-500 after:transition-all hover:text-emerald-600 hover:after:w-full"
               >
                 {item.name}
               </Link>
             ))}
-            <Button asChild size="sm">
+            <Button asChild size="sm" className="bg-gradient-to-r from-emerald-600 to-emerald-500 shadow-lg shadow-emerald-500/30 transition-all hover:shadow-xl hover:shadow-emerald-500/40">
               <Link href="/contact">Get Started</Link>
             </Button>
           </div>
