@@ -1,4 +1,4 @@
-import { HeroTech } from "@/components/hero-tech";
+import { HeroTechWithImage } from "@/components/hero-tech-with-image";
 import { Section } from "@/components/section";
 import { ServiceCardAnimated } from "@/components/service-card-animated";
 import { CTABlock } from "@/components/cta-block";
@@ -9,6 +9,7 @@ import { ScaleOnScroll } from "@/components/animations/scale-on-scroll";
 import { ParallaxScroll } from "@/components/animations/parallax-scroll";
 import { TechImagePlaceholder } from "@/components/tech-image-placeholder";
 import { ProfessionalImage } from "@/components/professional-image";
+import { ImageWithOverlay } from "@/components/image-with-overlay";
 import { ClientResultsShowcase } from "@/components/client-results-showcase";
 import {
   Settings,
@@ -24,7 +25,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero Section */}
-      <HeroTech
+      <HeroTechWithImage
         headline="Systems, Automation, and AI That Actually Move Your Business"
         subheadline="Walo helps growing businesses design and implement operations, automation, and AI assistants so teams can work smarter, not just harder."
         primaryCTA={{ text: "Book a Discovery Call", href: "/contact" }}
@@ -302,7 +303,11 @@ export default function HomePage() {
           </FadeIn>
           <ParallaxScroll offset={30}>
             <ScaleOnScroll>
-              <ProfessionalImage type="strategy" className="h-full min-h-[400px]" />
+              <ImageWithOverlay
+                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=2940&auto=format&fit=crop"
+                alt="Team meeting discussing strategy"
+                className="h-full min-h-[400px]"
+              />
             </ScaleOnScroll>
           </ParallaxScroll>
         </div>

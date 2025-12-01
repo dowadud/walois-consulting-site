@@ -7,6 +7,7 @@ import { FadeIn } from "@/components/animations/fade-in";
 import { ScaleOnScroll } from "@/components/animations/scale-on-scroll";
 import { ParallaxScroll } from "@/components/animations/parallax-scroll";
 import { ProfessionalImage } from "@/components/professional-image";
+import { ImageWithOverlay } from "@/components/image-with-overlay";
 import { Settings, Zap, Bot, Headphones, CheckCircle } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -61,7 +62,11 @@ export default function ServicesPage() {
           </FadeIn>
           <ParallaxScroll offset={20}>
             <ScaleOnScroll delay={0.2}>
-              <ProfessionalImage type="systems" className="mb-8 h-[300px]" />
+              <ImageWithOverlay
+                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop"
+                alt="Business operations dashboard"
+                className="mb-8 h-[300px]"
+              />
             </ScaleOnScroll>
             <FadeIn delay={0.3}>
               <Card>
@@ -101,7 +106,11 @@ export default function ServicesPage() {
           <div className="order-2 lg:order-1">
             <ParallaxScroll offset={20}>
               <ScaleOnScroll delay={0.2}>
-                <ProfessionalImage type="automation" className="mb-8 h-[300px]" />
+                <ImageWithOverlay
+                  src="https://images.unsplash.com/photo-1518186285589-2f7649de83e0?q=80&w=2874&auto=format&fit=crop"
+                  alt="Automation and technology"
+                  className="mb-8 h-[300px]"
+                />
               </ScaleOnScroll>
               <FadeIn delay={0.3}>
                 <Card>
@@ -180,7 +189,11 @@ export default function ServicesPage() {
           </FadeIn>
           <ParallaxScroll offset={20}>
             <ScaleOnScroll delay={0.2}>
-              <ProfessionalImage type="ai" className="mb-8 h-[300px]" />
+              <ImageWithOverlay
+                src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2832&auto=format&fit=crop"
+                alt="AI and machine learning"
+                className="mb-8 h-[300px]"
+              />
             </ScaleOnScroll>
             <FadeIn delay={0.3}>
               <Card>
@@ -216,7 +229,11 @@ export default function ServicesPage() {
           <div className="order-2 lg:order-1">
             <ParallaxScroll offset={20}>
               <ScaleOnScroll delay={0.2}>
-                <ProfessionalImage type="team" className="mb-8 h-[300px]" />
+                <ImageWithOverlay
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2940&auto=format&fit=crop"
+                  alt="Team collaboration and support"
+                  className="mb-8 h-[300px]"
+                />
               </ScaleOnScroll>
               <FadeIn delay={0.3}>
                 <Card>

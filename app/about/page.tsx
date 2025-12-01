@@ -8,6 +8,7 @@ import { StaggerContainer, StaggerItem } from "@/components/animations/stagger-c
 import { ScaleOnScroll } from "@/components/animations/scale-on-scroll";
 import { ParallaxScroll } from "@/components/animations/parallax-scroll";
 import { ProfessionalImage } from "@/components/professional-image";
+import { ImageWithOverlay } from "@/components/image-with-overlay";
 import { Target, Users, Lightbulb, TrendingUp } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -71,7 +72,11 @@ export default function AboutPage() {
           </FadeIn>
           <ParallaxScroll offset={30}>
             <ScaleOnScroll delay={0.2}>
-              <ProfessionalImage type="growth" className="h-full min-h-[500px]" />
+              <ImageWithOverlay
+                src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=2940&auto=format&fit=crop"
+                alt="Business growth and success"
+                className="h-full min-h-[500px]"
+              />
             </ScaleOnScroll>
           </ParallaxScroll>
         </div>
