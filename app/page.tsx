@@ -11,6 +11,7 @@ import { TechImagePlaceholder } from "@/components/tech-image-placeholder";
 import { ProfessionalImage } from "@/components/professional-image";
 import { ImageWithOverlay } from "@/components/image-with-overlay";
 import { ClientResultsShowcase } from "@/components/client-results-showcase";
+import { ImageGallery } from "@/components/image-gallery";
 import {
   Settings,
   Zap,
@@ -160,7 +161,7 @@ export default function HomePage() {
         title="How We Work"
         subtitle="A simple, proven process from chaos to clarity"
       >
-        <div className="mx-auto max-w-4xl">
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="space-y-12">
             <FadeIn direction="right">
               <div className="flex gap-6">
@@ -213,69 +214,45 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* Sample Outcomes */}
+      {/* Visual Showcase - Professional Images */}
       <Section
         background="gray"
-        title="Real Results"
-        subtitle="What happens when systems and automation work together"
+        title="Modern Business Solutions"
+        subtitle="Bringing enterprise-level intelligence to growing businesses"
       >
-        <StaggerContainer className="grid gap-8 md:grid-cols-3">
-          <StaggerItem>
-            <Card className="h-full overflow-hidden border-emerald-200 transition-all duration-300 hover:-translate-y-2 hover:border-emerald-500 hover:shadow-2xl hover:shadow-emerald-500/20">
-              <CardContent className="pt-6">
-                <div className="mb-4 bg-gradient-to-br from-emerald-600 to-emerald-500 bg-clip-text text-5xl font-bold text-transparent">
-                  5min
-                </div>
-                <h3 className="mb-2 text-lg font-semibold">
-                  Cut lead response time from 24 hours to under 5 minutes
-                </h3>
-                <p className="text-sm text-slate-600">
-                  Automated lead routing and instant notifications ensure no
-                  opportunity slips away.
-                </p>
-              </CardContent>
-            </Card>
-          </StaggerItem>
-
-          <StaggerItem>
-            <Card className="h-full overflow-hidden border-emerald-200 transition-all duration-300 hover:-translate-y-2 hover:border-emerald-500 hover:shadow-2xl hover:shadow-emerald-500/20">
-              <CardContent className="pt-6">
-                <div className="mb-4 bg-gradient-to-br from-emerald-600 to-emerald-500 bg-clip-text text-5xl font-bold text-transparent">
-                  70%
-                </div>
-                <h3 className="mb-2 text-lg font-semibold">
-                  Standardized client onboarding and reduced email back-and-forth
-                </h3>
-                <p className="text-sm text-slate-600">
-                  Clear intake forms and automated workflows make onboarding
-                  seamless for both clients and staff.
-                </p>
-              </CardContent>
-            </Card>
-          </StaggerItem>
-
-          <StaggerItem>
-            <Card className="h-full overflow-hidden border-emerald-200 transition-all duration-300 hover:-translate-y-2 hover:border-emerald-500 hover:shadow-2xl hover:shadow-emerald-500/20">
-              <CardContent className="pt-6">
-                <div className="mb-4 bg-gradient-to-br from-emerald-600 to-emerald-500 bg-clip-text text-5xl font-bold text-transparent">
-                  60%
-                </div>
-                <h3 className="mb-2 text-lg font-semibold">
-                  Implemented AI assistant to answer 60–70% of common FAQs
-                </h3>
-                <p className="text-sm text-slate-600">
-                  Free up your team to focus on high-value conversations while AI
-                  handles the routine questions.
-                </p>
-              </CardContent>
-            </Card>
-          </StaggerItem>
-        </StaggerContainer>
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <ScaleOnScroll>
+            <ImageWithOverlay
+              src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2940&auto=format&fit=crop"
+              alt="Team collaboration"
+              className="h-[300px]"
+            />
+          </ScaleOnScroll>
+          <ScaleOnScroll delay={0.1}>
+            <ImageWithOverlay
+              src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=2940&auto=format&fit=crop"
+              alt="Technology innovation"
+              className="h-[300px]"
+            />
+          </ScaleOnScroll>
+          <ScaleOnScroll delay={0.2}>
+            <ImageWithOverlay
+              src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2940&auto=format&fit=crop"
+              alt="Business analytics"
+              className="h-[300px]"
+            />
+          </ScaleOnScroll>
+        </div>
       </Section>
 
       {/* Client Results Showcase - inspired by Bain */}
       <Section background="white">
         <ClientResultsShowcase />
+      </Section>
+
+      {/* Image Gallery */}
+      <Section background="gray">
+        <ImageGallery />
       </Section>
 
       {/* About Walo with parallax images */}
