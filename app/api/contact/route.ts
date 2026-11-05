@@ -13,7 +13,9 @@ export async function POST(request: Request) {
   const error = (message: string, status: number) =>
     Response.json({ message }, { status });
 
-  if (request.headers.get("origin") !== new URL(request.url).origin) {
+  const url = new URL(request.url);
+  const host = request.headers.get("host") ?? url.host;
+  if (request.headers.get("origin") !== `${url.protocol}//${host}`) {
     return error("Request origin is not allowed.", 403);
   }
   if (request.headers.get("content-type")?.split(";")[0] !== "application/json") {
