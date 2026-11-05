@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, Zap, Bot } from "lucide-react";
+import { ArrowRight, MapPin, Sparkles, Zap, Bot } from "lucide-react";
 import Image from "next/image";
 
 interface HeroTechProps {
@@ -26,7 +26,7 @@ export function HeroTechWithImage({
   secondaryCTA,
 }: HeroTechProps) {
   return (
-    <section className="relative min-h-[90vh] overflow-hidden bg-slate-950 py-20 lg:py-32">
+    <section className="relative min-h-[90vh] overflow-hidden bg-slate-950 py-16 lg:py-24">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <Image
@@ -61,9 +61,9 @@ export function HeroTechWithImage({
             className="mb-8 flex justify-center"
           >
             <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-2 text-sm backdrop-blur-sm">
-              <Sparkles className="h-4 w-4 text-emerald-400" />
+              <MapPin aria-hidden="true" className="h-4 w-4 text-emerald-400" />
               <span className="text-emerald-100">
-                Transform Your Operations with AI
+                Serving Charlotte and Lake Wylie
               </span>
             </div>
           </motion.div>
@@ -75,7 +75,7 @@ export function HeroTechWithImage({
             transition={{ duration: 0.7, delay: 0.1 }}
             className="mx-auto max-w-5xl text-center"
           >
-            <h1 className="mb-6 bg-gradient-to-br from-white via-white to-emerald-200 bg-clip-text text-5xl font-bold tracking-tight text-transparent sm:text-6xl lg:text-7xl">
+            <h1 className="mb-6 bg-gradient-to-br from-white via-white to-emerald-200 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-6xl lg:text-7xl">
               {headline}
             </h1>
           </motion.div>

@@ -22,15 +22,20 @@ import {
   TrendingUp,
 } from "lucide-react";
 
+export const metadata = {
+  title: "Construction and Business Consulting | Walo Innovated Solutions",
+  description: "Walo Innovated Solutions serves Charlotte and Lake Wylie. Request a construction quote or a business consultation.",
+};
+
 export default function HomePage() {
   return (
     <>
       {/* Hero Section */}
       <HeroTechWithImage
-        headline="Systems, Automation, and AI That Actually Move Your Business"
-        subheadline="Walo helps growing businesses design and implement operations, automation, and AI assistants so teams can work smarter, not just harder."
-        primaryCTA={{ text: "Book a Discovery Call", href: "/contact" }}
-        secondaryCTA={{ text: "See Our Services", href: "/services" }}
+        headline="Construction and business consulting"
+        subheadline="Request a construction quote for your project or a consultation for your business."
+        primaryCTA={{ text: "Request a Quote", href: "/contact?type=quote#inquiry" }}
+        secondaryCTA={{ text: "Request a Consultation", href: "/contact#inquiry" }}
       />
 
       {/* What We Do */}
