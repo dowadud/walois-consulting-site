@@ -300,8 +300,8 @@ export default function HomePage() {
         <FadeIn>
           <CTABlock
             title="Tell us what's broken in your operations. We'll help fix it."
-            description="Book a free discovery call and let's talk about where your business is stuck—and how systems, automation, and AI can get you unstuck."
-            buttonText="Book a Discovery Call"
+            description="Request a free discovery call and let's talk about where your business is stuck—and how systems, automation, and AI can get you unstuck."
+            buttonText="Request a Consultation"
             buttonHref="/contact"
           />
         </FadeIn>

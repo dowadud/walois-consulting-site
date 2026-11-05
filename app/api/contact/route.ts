@@ -6,6 +6,7 @@ const limits = {
   businessType: 80,
   improvements: 3000,
   teamSize: 80,
+  projectLocation: 160,
 };
 
 export async function POST(request: Request) {
@@ -48,14 +49,19 @@ export async function POST(request: Request) {
     fields[key] = value.trim();
   }
 
-  if (!fields.fullName || !fields.companyName || !fields.businessType ||
+  if (data.type !== "quote" && data.type !== "consultation") {
+    return error("Choose a quote or a consultation.", 400);
+  }
+  const isQuote = data.type === "quote";
+  const missingDetails = isQuote ? !fields.projectLocation : !fields.companyName || !fields.businessType;
+  if (!fields.fullName || missingDetails ||
       !fields.improvements || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) {
     return error("Check the required fields and your email address.", 400);
   }
 
   const { RESEND_API_KEY, CONTACT_FROM_EMAIL, CONTACT_INBOX } = process.env;
   if (!RESEND_API_KEY || !CONTACT_FROM_EMAIL || !CONTACT_INBOX) {
-    return error("Online requests are currently unavailable. Please use the email link on this page.", 503);
+    return error("Online requests are currently unavailable. Please call the number on this page.", 503);
   }
 
   const sent = await fetch("https://api.resend.com/emails", {
@@ -69,14 +75,18 @@ export async function POST(request: Request) {
       from: CONTACT_FROM_EMAIL,
       to: [CONTACT_INBOX],
       reply_to: fields.email,
-      subject: "New Walo website inquiry",
+      subject: isQuote ? "New Walo construction quote request" : "New Walo consultation request",
       text: [
         `Name: ${fields.fullName}`,
         `Email: ${fields.email}`,
-        `Company: ${fields.companyName}`,
-        `Website: ${fields.website || "Not provided"}`,
-        `Business type: ${fields.businessType}`,
-        `Team size: ${fields.teamSize || "Not provided"}`,
+        ...(isQuote
+          ? [`Project location: ${fields.projectLocation}`]
+          : [
+            `Company: ${fields.companyName}`,
+            `Website: ${fields.website || "Not provided"}`,
+            `Business type: ${fields.businessType}`,
+            `Team size: ${fields.teamSize || "Not provided"}`,
+          ]),
         "",
         fields.improvements,
       ].join("\n"),
@@ -85,7 +95,7 @@ export async function POST(request: Request) {
   }).then((response) => response.ok).catch(() => false);
 
   if (!sent) {
-    return error("We couldn't send your request. Please try again or use the email link on this page.", 502);
+    return error("We couldn't send your request. Please try again or call the number on this page.", 502);
   }
   return Response.json({ accepted: true }, { status: 201 });
 }

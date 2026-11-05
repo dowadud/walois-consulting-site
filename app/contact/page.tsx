@@ -3,15 +3,21 @@ import { Section } from "@/components/section";
 import { ContactForm } from "@/components/contact-form";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Mail, MapPin, Clock } from "lucide-react";
+import Link from "next/link";
+import { Phone, MapPin, Clock } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Contact Us | Walo Innovated Solutions",
   description:
-    "Get in touch with Walo Innovated Solutions. Book a discovery call to discuss how we can help optimize your operations with systems, automation, and AI.",
+    "Request a construction quote or business consultation from Walo Innovated Solutions.",
 };
 
-export default function ContactPage() {
+export default async function ContactPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ type?: string | string[] }>;
+}) {
+  const isQuote = (await searchParams).type === "quote";
   return (
     <>
       {/* Hero */}
@@ -21,26 +27,35 @@ export default function ContactPage() {
             Get In Touch
           </Badge>
           <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
-            Let's Talk About Your Operations
+            Request a Quote or Consultation
           </h1>
           <p className="mt-6 text-lg text-slate-600">
-            Tell us what's not working in your business. We'll help you map out
-            a plan to fix it with systems, automation, and AI.
+            Tell us about your construction project or what you’d like to improve in your business.
           </p>
         </div>
       </Section>
 
       {/* Contact Form and Info */}
-      <Section>
+      <Section id="inquiry" className="scroll-mt-20">
         <div className="grid gap-12 lg:grid-cols-3 lg:gap-16">
           {/* Form */}
           <div className="lg:col-span-2">
             <Card>
               <CardContent className="p-8">
+                <nav aria-label="Inquiry type" className="mb-6 flex flex-wrap gap-4">
+                  <Link href="/contact?type=quote#inquiry" aria-current={isQuote ? "page" : undefined}
+                    className={isQuote ? "font-semibold text-slate-950" : "text-emerald-700 underline"}>
+                    Construction quote
+                  </Link>
+                  <Link href="/contact#inquiry" aria-current={!isQuote ? "page" : undefined}
+                    className={!isQuote ? "font-semibold text-slate-950" : "text-emerald-700 underline"}>
+                    Business consultation
+                  </Link>
+                </nav>
                 <h2 className="mb-6 text-2xl font-bold">
-                  Book a Discovery Call
+                  {isQuote ? "Request a Construction Quote" : "Request a Business Consultation"}
                 </h2>
-                <ContactForm />
+                <ContactForm key={isQuote ? "quote" : "consultation"} isQuote={isQuote} />
               </CardContent>
             </Card>
           </div>
@@ -54,9 +69,7 @@ export default function ContactPage() {
                 </div>
                 <h3 className="mb-2 text-lg font-semibold">Location</h3>
                 <p className="text-slate-600">
-                  Charlotte, North Carolina
-                  <br />
-                  Serving businesses across the region and beyond
+                  Serving Charlotte and Lake Wylie
                 </p>
               </CardContent>
             </Card>
@@ -64,15 +77,15 @@ export default function ContactPage() {
             <Card>
               <CardContent className="p-6">
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-emerald-100">
-                  <Mail className="h-6 w-6 text-emerald-600" />
+                  <Phone className="h-6 w-6 text-emerald-600" />
                 </div>
-                <h3 className="mb-2 text-lg font-semibold">Email</h3>
+                <h3 className="mb-2 text-lg font-semibold">Phone</h3>
                 <p className="text-slate-600">
                   <a
-                    href="mailto:hello@walois.com"
+                    href="tel:+17049810555"
                     className="text-emerald-600 hover:underline"
                   >
-                    hello@walois.com
+                    (704) 981-0555
                   </a>
                 </p>
               </CardContent>
@@ -94,24 +107,11 @@ export default function ContactPage() {
               <h3 className="mb-2 text-lg font-semibold text-emerald-900">
                 What Happens Next?
               </h3>
-              <ol className="space-y-2 text-sm text-emerald-800">
-                <li className="flex">
-                  <span className="mr-2 font-semibold">1.</span>
-                  <span>We review your information and challenges</span>
-                </li>
-                <li className="flex">
-                  <span className="mr-2 font-semibold">2.</span>
-                  <span>Schedule a 30-minute discovery call</span>
-                </li>
-                <li className="flex">
-                  <span className="mr-2 font-semibold">3.</span>
-                  <span>Map out a custom plan for your business</span>
-                </li>
-                <li className="flex">
-                  <span className="mr-2 font-semibold">4.</span>
-                  <span>Start implementing systems that work</span>
-                </li>
-              </ol>
+              <p className="text-sm text-emerald-800">
+                {isQuote
+                  ? "We’ll review your project details and follow up about scope and next steps."
+                  : "We’ll review your request and follow up to arrange a discovery call."}
+              </p>
             </div>
           </div>
         </div>

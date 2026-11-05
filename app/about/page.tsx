@@ -294,7 +294,7 @@ export default function AboutPage() {
           <CTABlock
           title="Ready to Transform Your Operations?"
           description="Let's talk about your business, your challenges, and how we can help you build systems that actually work."
-          buttonText="Book a Discovery Call"
+          buttonText="Request a Consultation"
           buttonHref="/contact"
         />
         </FadeIn>

@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-interface FormData {
+interface ContactFields {
   fullName: string;
   email: string;
   companyName: string;
@@ -21,10 +21,11 @@ interface FormData {
   businessType: string;
   improvements: string;
   teamSize: string;
+  projectLocation: string;
 }
 
-export function ContactForm() {
-  const [formData, setFormData] = useState<FormData>({
+export function ContactForm({ isQuote }: { isQuote: boolean }) {
+  const [formData, setFormData] = useState<ContactFields>({
     fullName: "",
     email: "",
     companyName: "",
@@ -32,6 +33,7 @@ export function ContactForm() {
     businessType: "",
     improvements: "",
     teamSize: "",
+    projectLocation: "",
   });
 
   const requestId = useRef<string | null>(null);
@@ -39,12 +41,12 @@ export function ContactForm() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>(
+  const [errors, setErrors] = useState<Partial<Record<keyof ContactFields, string>>>(
     {}
   );
 
   const validateForm = (): boolean => {
-    const newErrors: Partial<Record<keyof FormData, string>> = {};
+    const newErrors: Partial<Record<keyof ContactFields, string>> = {};
 
     if (!formData.fullName.trim()) {
       newErrors.fullName = "Full name is required";
@@ -56,16 +58,19 @@ export function ContactForm() {
       newErrors.email = "Please enter a valid email address";
     }
 
-    if (!formData.companyName.trim()) {
+    if (!isQuote && !formData.companyName.trim()) {
       newErrors.companyName = "Company name is required";
     }
 
-    if (!formData.businessType) {
+    if (!isQuote && !formData.businessType) {
       newErrors.businessType = "Please select a business type";
     }
 
+    if (isQuote && !formData.projectLocation.trim()) {
+      newErrors.projectLocation = "Project location is required";
+    }
     if (!formData.improvements.trim()) {
-      newErrors.improvements = "Please tell us what you want to improve";
+      newErrors.improvements = isQuote ? "Please describe your project" : "Please tell us what you want to improve";
     }
 
     setErrors(newErrors);
@@ -86,8 +91,9 @@ export function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
+          type: isQuote ? "quote" : "consultation",
           requestId: requestId.current,
-          companyFax: new window.FormData(e.currentTarget).get("companyFax") ?? "",
+          companyFax: new FormData(e.currentTarget).get("companyFax") ?? "",
         }),
       });
       const result = await response.json();
@@ -97,14 +103,14 @@ export function ContactForm() {
       }
       setIsSuccess(true);
     } catch {
-      setSubmitError("We couldn't send your request. Please try again or use the email link on this page.");
+      setSubmitError("We couldn't send your request. Please try again or call the number on this page.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const handleChange = (
-    field: keyof FormData,
+    field: keyof ContactFields,
     value: string
   ) => {
     requestId.current = null;
@@ -152,6 +158,7 @@ export function ContactForm() {
           </Label>
           <Input
             id="fullName"
+            maxLength={120}
             type="text"
             value={formData.fullName}
             onChange={(e) => handleChange("fullName", e.target.value)}
@@ -168,6 +175,7 @@ export function ContactForm() {
           </Label>
           <Input
             id="email"
+            maxLength={254}
             type="email"
             value={formData.email}
             onChange={(e) => handleChange("email", e.target.value)}
@@ -179,75 +187,98 @@ export function ContactForm() {
         </div>
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2">
+      {isQuote ? (
         <div>
-          <Label htmlFor="companyName">
-            Company Name <span className="text-red-500">*</span>
+          <Label htmlFor="projectLocation">
+            Project city and ZIP code <span className="text-red-500">*</span>
           </Label>
           <Input
-            id="companyName"
-            type="text"
-            value={formData.companyName}
-            onChange={(e) => handleChange("companyName", e.target.value)}
-            className={errors.companyName ? "border-red-500" : ""}
+            id="projectLocation"
+            maxLength={160}
+            value={formData.projectLocation}
+            onChange={(e) => handleChange("projectLocation", e.target.value)}
+            className={errors.projectLocation ? "border-red-500" : ""}
           />
-          {errors.companyName && (
-            <p className="mt-1 text-sm text-red-500">{errors.companyName}</p>
+          {errors.projectLocation && (
+            <p className="mt-1 text-sm text-red-500">{errors.projectLocation}</p>
           )}
         </div>
+      ) : (
+        <>
+          <div className="grid gap-6 sm:grid-cols-2">
+            <div>
+              <Label htmlFor="companyName">
+                Company Name <span className="text-red-500">*</span>
+              </Label>
+              <Input
+                id="companyName"
+                maxLength={160}
+                type="text"
+                value={formData.companyName}
+                onChange={(e) => handleChange("companyName", e.target.value)}
+                className={errors.companyName ? "border-red-500" : ""}
+              />
+              {errors.companyName && (
+                <p className="mt-1 text-sm text-red-500">{errors.companyName}</p>
+              )}
+            </div>
 
-        <div>
-          <Label htmlFor="website">Website (Optional)</Label>
-          <Input
-            id="website"
-            type="url"
-            placeholder="https://"
-            value={formData.website}
-            onChange={(e) => handleChange("website", e.target.value)}
-          />
-        </div>
-      </div>
+            <div>
+              <Label htmlFor="website">Website (Optional)</Label>
+              <Input
+                id="website"
+                maxLength={500}
+                type="url"
+                placeholder="https://"
+                value={formData.website}
+                onChange={(e) => handleChange("website", e.target.value)}
+              />
+            </div>
+          </div>
 
-      <div>
-        <Label htmlFor="businessType">
-          What best describes you? <span className="text-red-500">*</span>
-        </Label>
-        <Select
-          value={formData.businessType}
-          onValueChange={(value) => handleChange("businessType", value)}
-        >
-          <SelectTrigger
-            id="businessType"
-            className={errors.businessType ? "border-red-500" : ""}
-          >
-            <SelectValue placeholder="Select one..." />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="service-business">Service Business</SelectItem>
-            <SelectItem value="agency-consultant">
-              Agency/Consultant
-            </SelectItem>
-            <SelectItem value="contractor">Contractor/Home Services</SelectItem>
-            <SelectItem value="professional-services">
-              Professional Services (Legal, Medical, Finance)
-            </SelectItem>
-            <SelectItem value="startup-founder">Startup/Founder</SelectItem>
-            <SelectItem value="other">Other</SelectItem>
-          </SelectContent>
-        </Select>
-        {errors.businessType && (
-          <p className="mt-1 text-sm text-red-500">{errors.businessType}</p>
-        )}
-      </div>
+          <div>
+            <Label htmlFor="businessType">
+              What best describes you? <span className="text-red-500">*</span>
+            </Label>
+            <Select
+              value={formData.businessType}
+              onValueChange={(value) => handleChange("businessType", value)}
+            >
+              <SelectTrigger
+                id="businessType"
+                className={errors.businessType ? "border-red-500" : ""}
+              >
+                <SelectValue placeholder="Select one..." />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="service-business">Service Business</SelectItem>
+                <SelectItem value="agency-consultant">
+                  Agency/Consultant
+                </SelectItem>
+                <SelectItem value="contractor">Contractor/Home Services</SelectItem>
+                <SelectItem value="professional-services">
+                  Professional Services (Legal, Medical, Finance)
+                </SelectItem>
+                <SelectItem value="startup-founder">Startup/Founder</SelectItem>
+                <SelectItem value="other">Other</SelectItem>
+              </SelectContent>
+            </Select>
+            {errors.businessType && (
+              <p className="mt-1 text-sm text-red-500">{errors.businessType}</p>
+            )}
+          </div>
+        </>
+      )}
 
       <div>
         <Label htmlFor="improvements">
-          What do you want to improve? <span className="text-red-500">*</span>
+          {isQuote ? "Tell us about your project" : "What do you want to improve?"} <span className="text-red-500">*</span>
         </Label>
         <Textarea
           id="improvements"
           rows={5}
-          placeholder="Tell us about your current challenges, what's not working, or what you'd like to automate..."
+          maxLength={3000}
+          placeholder={isQuote ? "What work do you need and when are you hoping to start?" : "Tell us about your current challenges."}
           value={formData.improvements}
           onChange={(e) => handleChange("improvements", e.target.value)}
           className={errors.improvements ? "border-red-500" : ""}
@@ -257,16 +288,19 @@ export function ContactForm() {
         )}
       </div>
 
-      <div>
-        <Label htmlFor="teamSize">Approximate Team Size (Optional)</Label>
-        <Input
-          id="teamSize"
-          type="text"
-          placeholder="e.g., 5-10 people"
-          value={formData.teamSize}
-          onChange={(e) => handleChange("teamSize", e.target.value)}
-        />
-      </div>
+      {!isQuote && (
+        <div>
+          <Label htmlFor="teamSize">Approximate Team Size (Optional)</Label>
+          <Input
+            id="teamSize"
+            maxLength={80}
+            type="text"
+            placeholder="e.g., 5-10 people"
+            value={formData.teamSize}
+            onChange={(e) => handleChange("teamSize", e.target.value)}
+          />
+        </div>
+      )}
 
       <div hidden>
         <label htmlFor="companyFax">Leave this field blank</label>
@@ -274,7 +308,7 @@ export function ContactForm() {
       </div>
       {submitError && <p role="alert" className="text-sm text-red-700">{submitError}</p>}
       <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
-        {isSubmitting ? "Submitting..." : "Send Message"}
+        {isSubmitting ? "Submitting..." : isQuote ? "Send Quote Request" : "Send Consultation Request"}
       </Button>
     </form>
   );
