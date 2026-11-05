@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -33,6 +33,9 @@ export function ContactForm() {
     improvements: "",
     teamSize: "",
   });
+
+  const requestId = useRef<string | null>(null);
+  const [submitError, setSubmitError] = useState("");
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -69,43 +72,42 @@ export function ContactForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!validateForm()) {
-      return;
-    }
+    if (isSubmitting || !validateForm()) return;
 
+    setSubmitError("");
     setIsSubmitting(true);
-
-    // Simulate API call
-    console.log("Form submitted:", formData);
-
-    // In production, this would connect to an API route or service
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      requestId.current ??= crypto.randomUUID();
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          requestId: requestId.current,
+          companyFax: new window.FormData(e.currentTarget).get("companyFax") ?? "",
+        }),
+      });
+      const result = await response.json();
+      if (!response.ok || result.accepted !== true) {
+        setSubmitError(result.message || "We couldn't send your request. Please try again.");
+        return;
+      }
       setIsSuccess(true);
-
-      // Reset form after 3 seconds
-      setTimeout(() => {
-        setFormData({
-          fullName: "",
-          email: "",
-          companyName: "",
-          website: "",
-          businessType: "",
-          improvements: "",
-          teamSize: "",
-        });
-        setIsSuccess(false);
-      }, 3000);
-    }, 1000);
+    } catch {
+      setSubmitError("We couldn't send your request. Please try again or use the email link on this page.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
     field: keyof FormData,
     value: string
   ) => {
+    requestId.current = null;
     setFormData((prev) => ({ ...prev, [field]: value }));
     // Clear error when user starts typing
     if (errors[field]) {
@@ -115,7 +117,7 @@ export function ContactForm() {
 
   if (isSuccess) {
     return (
-      <div className="rounded-lg border-2 border-emerald-200 bg-emerald-50 p-8 text-center">
+      <div role="status" className="rounded-lg border-2 border-emerald-200 bg-emerald-50 p-8 text-center">
         <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100">
           <svg
             className="h-8 w-8 text-emerald-600"
@@ -266,6 +268,11 @@ export function ContactForm() {
         />
       </div>
 
+      <div hidden>
+        <label htmlFor="companyFax">Leave this field blank</label>
+        <input id="companyFax" name="companyFax" tabIndex={-1} autoComplete="off" />
+      </div>
+      {submitError && <p role="alert" className="text-sm text-red-700">{submitError}</p>}
       <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
         {isSubmitting ? "Submitting..." : "Send Message"}
       </Button>
