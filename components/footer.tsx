@@ -7,6 +7,7 @@ const footerLinks = {
     { name: "Contact", href: "/contact" },
   ],
   services: [
+    { name: "Construction", href: "/services#construction" },
     { name: "Operations Consulting", href: "/services#operations" },
     { name: "Automation & Integration", href: "/services#automation" },
     { name: "AI Assistants", href: "/services#ai" },
@@ -24,10 +25,10 @@ export function Footer() {
               Walo Innovated Solutions
             </Link>
             <p className="mt-4 text-sm text-slate-400">
-              Systems, automation, and AI for growing businesses.
+              Construction and business consulting.
             </p>
             <p className="mt-2 text-sm text-slate-400">
-              Charlotte, North Carolina
+              Serving Charlotte and Lake Wylie
             </p>
           </div>
 

@@ -1,4 +1,6 @@
 import { Metadata } from "next";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import { Section } from "@/components/section";
 import { CTABlock } from "@/components/cta-block";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,7 +15,7 @@ import { Settings, Zap, Bot, Headphones, CheckCircle } from "lucide-react";
 export const metadata: Metadata = {
   title: "Services | Walo Innovated Solutions",
   description:
-    "Operations consulting, automation & integrations, AI assistants, and ongoing support. We design and implement systems that help your business run smarter.",
+    "Explore construction and business consulting from Walo Innovated Solutions in Charlotte and Lake Wylie.",
 };
 
 export default function ServicesPage() {
@@ -26,12 +28,24 @@ export default function ServicesPage() {
             Our Services
           </Badge>
           <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
-            Systems, Automation, and AI Implementation
+            Construction and Business Consulting
           </h1>
           <p className="mt-6 text-lg text-slate-600">
-            We don't just advise—we design, build, and support the systems your
-            business needs to operate with clarity and intelligence.
+            Explore construction in Charlotte and Lake Wylie or consulting for business operations, automation, and AI.
           </p>
+        </div>
+      </Section>
+
+      <Section id="construction" title="Construction" className="scroll-mt-20" background="gray">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="text-lg text-slate-600">
+            Planning a project in Charlotte or Lake Wylie? Tell us where it is, what work you need,
+            and when you hope to start. We’ll review the details and let you know whether the
+            project fits the work we take on.
+          </p>
+          <Button asChild size="lg" className="mt-6">
+            <Link href="/contact?type=quote#inquiry">Request a Quote</Link>
+          </Button>
         </div>
       </Section>
 
