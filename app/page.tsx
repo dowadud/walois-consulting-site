@@ -10,7 +10,6 @@ import { ParallaxScroll } from "@/components/animations/parallax-scroll";
 import { TechImagePlaceholder } from "@/components/tech-image-placeholder";
 import { ProfessionalImage } from "@/components/professional-image";
 import { ImageWithOverlay } from "@/components/image-with-overlay";
-import { ClientResultsShowcase } from "@/components/client-results-showcase";
 import { ImageGallery } from "@/components/image-gallery";
 import {
   Settings,
@@ -248,11 +247,6 @@ export default function HomePage() {
             />
           </ScaleOnScroll>
         </div>
-      </Section>
-
-      {/* Client Results Showcase - inspired by Bain */}
-      <Section background="white">
-        <ClientResultsShowcase />
       </Section>
 
       {/* Image Gallery */}

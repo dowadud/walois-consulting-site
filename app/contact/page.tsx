@@ -4,7 +4,7 @@ import { ContactForm } from "@/components/contact-form";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
-import { Phone, MapPin, Clock } from "lucide-react";
+import { Phone, MapPin } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Contact Us | Walo Innovated Solutions",
@@ -87,18 +87,6 @@ export default async function ContactPage({
                   >
                     (704) 981-0555
                   </a>
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-6">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-emerald-100">
-                  <Clock className="h-6 w-6 text-emerald-600" />
-                </div>
-                <h3 className="mb-2 text-lg font-semibold">Response Time</h3>
-                <p className="text-slate-600">
-                  We typically respond within 24 hours during business days.
                 </p>
               </CardContent>
             </Card>

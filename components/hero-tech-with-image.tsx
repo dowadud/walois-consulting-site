@@ -145,33 +145,6 @@ export function HeroTechWithImage({
               <span>Systems Design</span>
             </div>
           </motion.div>
-
-          {/* Stats bar */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.5 }}
-            className="mt-20 grid grid-cols-1 gap-8 sm:grid-cols-3"
-          >
-            <div className="rounded-xl border border-emerald-500/20 bg-slate-900/50 p-6 text-center backdrop-blur-sm">
-              <div className="text-3xl font-bold text-emerald-400">5min</div>
-              <div className="mt-2 text-sm text-slate-400">
-                Average lead response time
-              </div>
-            </div>
-            <div className="rounded-xl border border-emerald-500/20 bg-slate-900/50 p-6 text-center backdrop-blur-sm">
-              <div className="text-3xl font-bold text-emerald-400">70%</div>
-              <div className="mt-2 text-sm text-slate-400">
-                Reduction in manual work
-              </div>
-            </div>
-            <div className="rounded-xl border border-emerald-500/20 bg-slate-900/50 p-6 text-center backdrop-blur-sm">
-              <div className="text-3xl font-bold text-emerald-400">24/7</div>
-              <div className="mt-2 text-sm text-slate-400">
-                AI assistant availability
-              </div>
-            </div>
-          </motion.div>
         </div>
       </div>
 
