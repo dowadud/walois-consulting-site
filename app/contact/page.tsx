@@ -82,10 +82,10 @@ export default async function ContactPage({
                 <h3 className="mb-2 text-lg font-semibold">Phone</h3>
                 <p className="text-slate-600">
                   <a
-                    href="tel:+17049810555"
+                    href="tel:+17042081866"
                     className="text-emerald-600 hover:underline"
                   >
-                    (704) 981-0555
+                    (704) 208-1866
                   </a>
                 </p>
               </CardContent>
